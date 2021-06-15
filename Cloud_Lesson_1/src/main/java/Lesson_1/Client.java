@@ -1,3 +1,5 @@
+package Lesson_1;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -11,7 +13,7 @@ public class Client extends JFrame {
     private final DataInputStream in;
 
     public Client() throws IOException {
-        socket = new Socket("localhost", 5678);
+        socket = new Socket("localhost", 5679);
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 

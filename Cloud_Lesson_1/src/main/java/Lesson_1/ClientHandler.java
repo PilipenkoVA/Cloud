@@ -1,3 +1,5 @@
+package Lesson_1;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -18,7 +20,7 @@ public class ClientHandler implements Runnable {
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 DataInputStream in = new DataInputStream(socket.getInputStream())
         ) {
-            System.out.printf("Client %s connected\n", socket.getInetAddress());
+            System.out.printf("Lesson_1.Client %s connected\n", socket.getInetAddress());
             while (true) {
                 String command = in.readUTF();
                 if ("upload".equals(command)) {
@@ -48,7 +50,7 @@ public class ClientHandler implements Runnable {
                     // TODO: 14.06.2021
                 }
                 if ("exit".equals(command)) {
-                    System.out.printf("Client %s disconnected correctly\n", socket.getInetAddress());
+                    System.out.printf("Lesson_1.Client %s disconnected correctly\n", socket.getInetAddress());
                     break;
                 }
 
