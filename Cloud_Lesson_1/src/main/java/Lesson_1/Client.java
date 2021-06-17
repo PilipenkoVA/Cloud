@@ -60,8 +60,8 @@ public class Client extends JFrame {
         try {
             out.writeUTF("download");
             out.writeUTF(filename);
-            String serverAck = in.readUTF();
-            if("exists".equals(serverAck)) {
+            String serverAnswer = in.readUTF();
+            if("exists".equals(serverAnswer)) {
                 File file = new File("client"+File.separator+filename);
                 if(!file.exists()){
                     file.createNewFile();
@@ -78,7 +78,7 @@ public class Client extends JFrame {
                 fos.close();
             }
             else{
-                System.out.println(serverAck);
+                System.out.println(serverAnswer);
             }
         } catch (IOException e) {
             try {
