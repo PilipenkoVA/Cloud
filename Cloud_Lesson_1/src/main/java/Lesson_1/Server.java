@@ -6,11 +6,9 @@ import java.util.concurrent.Executors;
 
 public class Server {
     // TODO: 14.06.2021
-    // организовать корректный вывод статуса
-    // подумать почему так реализован цикл в Lesson_1.ClientHandler
     public Server() {
         ExecutorService service = Executors.newFixedThreadPool(4);
-        try (ServerSocket server = new ServerSocket(5679)){
+        try (ServerSocket server = new ServerSocket(5677)){
             System.out.println("Lesson_1.Server started");
             while (true) {
                 service.execute(new ClientHandler(server.accept()));

@@ -13,24 +13,30 @@ public class Client extends JFrame {
     private final DataInputStream in;
 
     public Client() throws IOException {
-        socket = new Socket("localhost", 5679);
+        socket = new Socket("localhost", 5677);
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 
         setSize(300, 300);
+        setDefaultCloseOperation(3);
         JPanel panel = new JPanel(new GridLayout(2, 1));
 
         JButton btnSend = new JButton("SEND");
         JTextField textField = new JTextField();
 
         btnSend.addActionListener(a -> {
-            // upload 1.txt
-            // download img.png
             String[] cmd = textField.getText().split(" ");
-            if ("upload".equals(cmd[0])) {
+            if (" ".equals(cmd[0])) {
+                textField.setText("");
                 sendFile(cmd[1]);
             } else if ("download".equals(cmd[0])) {
+                textField.setText("");
                 getFile(cmd[1]);
+            }
+            else {
+                String msg = textField.getText();
+                textField.setText("");
+                sendMessage(msg);
             }
         });
 
@@ -49,8 +55,38 @@ public class Client extends JFrame {
         setVisible(true);
     }
 
-    private void getFile(String s) {
+    private void getFile(String filename) {
         // TODO: 14.06.2021
+        try {
+            out.writeUTF("download");
+            out.writeUTF(filename);
+            String serverAck = in.readUTF();
+            if("exists".equals(serverAck)) {
+                File file = new File("client"+File.separator+filename);
+                if(!file.exists()){
+                    file.createNewFile();
+                }
+                FileOutputStream fos = new FileOutputStream(file);
+                long size = in.readLong();
+                byte[] buffer = new byte[1024];
+                for (int i = 0; i < (size + (buffer.length - 1)) / (buffer.length); i++) {
+                    int read = in.read(buffer);
+                    fos.write(buffer, 0, read);
+                }
+                System.out.println("Downloading file: "+file.getName()+" - completed");
+                out.writeUTF(file.getName()+" - downloaded");
+                fos.close();
+            }
+            else{
+                System.out.println(serverAck);
+            }
+        } catch (IOException e) {
+            try {
+                out.writeUTF("FATAL ERROR");
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
+        }
     }
 
     private void sendFile(String filename) {
@@ -76,6 +112,7 @@ public class Client extends JFrame {
             out.flush();
 
             String status = in.readUTF();
+            fis.close();
             System.out.println("sending status: " + status);
 
         } catch (FileNotFoundException e) {
