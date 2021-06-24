@@ -37,8 +37,8 @@ public class ClientHandler implements Runnable {
                             int read = in.read(buffer);
                             fos.write(buffer, 0, read);
                         }
-                        System.out.println(command+" "+file.getName()+" completed");
-                        out.writeUTF("Uploading "+file.getName() +" completed");
+                        System.out.println(command+" " + file.getName() + " completed");
+                        out.writeUTF("Uploading " + file.getName() + " completed");
                         fos.close();
                         out.writeUTF("OK");
                     } catch (Exception e) {
@@ -66,8 +66,8 @@ public class ClientHandler implements Runnable {
                             System.out.println("Downloading status: " + status);
                         }
                         else{
-                            out.writeUTF("File "+file.getName()+" not found on a server");
-                            System.out.println("File "+file.getName()+" not found");
+                            out.writeUTF("File " + file.getName() + " not found on a server");
+                            System.out.println("File " + file.getName() + " not found");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

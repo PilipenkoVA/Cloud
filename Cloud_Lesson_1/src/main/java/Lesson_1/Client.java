@@ -62,7 +62,7 @@ public class Client extends JFrame {
             out.writeUTF(filename);
             String serverAnswer = in.readUTF();
             if("exists".equals(serverAnswer)) {
-                File file = new File("client"+File.separator+filename);
+                File file = new File("client" + File.separator + filename);
                 if(!file.exists()){
                     file.createNewFile();
                 }
@@ -73,8 +73,8 @@ public class Client extends JFrame {
                     int read = in.read(buffer);
                     fos.write(buffer, 0, read);
                 }
-                System.out.println("Downloading file: "+file.getName()+" - completed");
-                out.writeUTF(file.getName()+" - downloaded");
+                System.out.println("Downloading file: " + file.getName() + " - completed");
+                out.writeUTF(file.getName() + " - downloaded");
                 fos.close();
             }
             else{
