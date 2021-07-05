@@ -12,7 +12,7 @@ public class MainHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Client: " + ctx.channel() + " connected");                                         // выводим данные о подключившимся клиенте в консоль
+        System.out.println("Client: " + ctx.channel() + " connected...");                               // выводим данные о подключившимся клиенте в консоль
     }
 
     // ПОЛУЧЕНИЕ
@@ -30,7 +30,7 @@ public class MainHandler extends ChannelInboundHandlerAdapter {
     }
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Client: " + ctx.channel() + " disconnected");                                      // выводим данные о подключившимся клиенте в консоль
+        System.out.println("Client: " + ctx.channel() + " disconnected...");                             // выводим данные о подключившимся клиенте в консоль
     }
 
     @Override

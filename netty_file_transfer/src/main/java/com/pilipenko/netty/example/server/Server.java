@@ -13,9 +13,12 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 
 public class Server {
     public void run() throws Exception {
+        // Пул потоков для обработки подключений клиентов
         EventLoopGroup mainGroup = new NioEventLoopGroup();
+        // Пул потоков для обработки сетевых сообщений
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
+            // Создание настроек сервера
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(mainGroup, workerGroup)
                     // для подключения будем использовать "NioServerSocketChannel"

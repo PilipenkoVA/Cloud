@@ -28,6 +28,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Network.start();                                                            // при запуске клиента подключаемся к серверу
+        System.out.println("connected...");
         // Далее создается "Thread"
         Thread t = new Thread(() -> {
             try {
@@ -58,12 +59,18 @@ public class MainController implements Initializable {
     public void pressOnDownloadBtn(ActionEvent actionEvent) {                        // когда нажимаем на кнопку скачать
         if (tfFileName.getLength() > 0) {
             Network.sendMsg(new FileRequest(tfFileName.getText()));                  // посылаем в сторону сервера "FileRequest" с именем интересующего нас файла
-            tfFileName.clear();
+            tfFileName.clear();                                                      // очищаем поле для ввода
         }
     }
+//     Нажатие на кнопку "Загрузить"
+    public void pressOnUploadBtn(ActionEvent actionEvent) {                        // когда нажимаем на кнопку загрузить
+        System.out.println("Загрузить файл: " + tfFileName.getText());
+        tfFileName.clear();                                                        // очищаем поле для ввода
+    }
+
     // Обновление списка локалиных файлов "FilesList"
     public void refreshLocalFilesList() {
-        updateUI(() -> {
+        Platform.runLater(() -> {
             try {
                 filesList.getItems().clear();                                       // очищаем "filesList"
 
@@ -73,13 +80,5 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static void updateUI(Runnable r) {
-        if (Platform.isFxApplicationThread()) {
-            r.run();
-        } else {
-            Platform.runLater(r);
-        }
     }
 }
