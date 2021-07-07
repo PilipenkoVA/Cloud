@@ -1,0 +1,27 @@
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+
+<!--                                             СОЗДАЛИ -->
+<!--Дополнительную панель чтобы не переписывать заново коз из класса "Controller" и к ней свой "PanelController"-->
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/1.8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.PanelController">
+    <HBox>
+<!--        будем выводить диски (необходим для инициализации)-->
+        <ComboBox fx:id="diskBox" onAction="#selectDiskAction"/>
+<!--        будем выводит путь файла-->
+        <TextField fx:id="pathField" editable="false" HBox.hgrow="ALWAYS" />
+
+        <Button text="Вверх" onAction="#btnUpPathAction"/>
+    </HBox>
+<!--    выводим список файлов -->
+    <TableView fx:id="filesTable" VBox.vgrow="ALWAYS" />
+    <properties>
+<!--        Зависимость от второго контролера: т.к. все кнопки в нем-->
+        <ctrl><fx:reference source="controller"/> </ctrl>
+    </properties>
+</VBox>
