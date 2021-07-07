@@ -4,10 +4,13 @@ import com.pilipenko.netty.example.common.AbstractMessage;
 import com.pilipenko.netty.example.common.FileMessage;
 import com.pilipenko.netty.example.common.FileRequest;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -22,13 +25,13 @@ public class MainController implements Initializable {
     TextField tfFileName;                                                            // имя файла который нам необходим
 
     @FXML
-    ListView<String> filesList;                                                     // список файлов которые есть на клиенте
+    ListView<String> filesList;                                                      // таблица файлов которые есть на клиенте
 
     // Запуск потока
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Network.start();                                                            // при запуске клиента подключаемся к серверу
-        System.out.println("connected...");
+        System.out.println("Client started...");
         // Далее создается "Thread"
         Thread t = new Thread(() -> {
             try {
@@ -80,5 +83,9 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+    // Выход из программы
+    public void btnExit(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

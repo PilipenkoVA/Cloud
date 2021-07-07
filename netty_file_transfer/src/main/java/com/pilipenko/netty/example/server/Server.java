@@ -36,7 +36,7 @@ public class Server {
                     });
 
             ChannelFuture future = bootstrap.bind(8189).sync();
-            System.out.println("Server stared");
+            System.out.println("Server started");
             // ждем завершение работы сервера чтобы попасть в блок "finally "
             future.channel().closeFuture().sync();
             System.out.println("Server finished");
