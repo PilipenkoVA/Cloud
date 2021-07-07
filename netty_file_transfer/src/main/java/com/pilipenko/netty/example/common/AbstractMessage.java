@@ -1,3 +1,4 @@
+
 package com.pilipenko.netty.example.common;
 
 import java.io.Serializable;

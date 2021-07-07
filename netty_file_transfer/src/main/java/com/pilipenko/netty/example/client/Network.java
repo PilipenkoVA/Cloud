@@ -1,3 +1,4 @@
+
 package com.pilipenko.netty.example.client;
 
 import com.pilipenko.netty.example.common.AbstractMessage;

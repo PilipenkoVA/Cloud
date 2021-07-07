@@ -1,3 +1,4 @@
+
 package com.pilipenko.netty.example.client;
 
 import javafx.application.Application;
@@ -21,3 +22,4 @@ public class MainClient extends Application {
         launch(args);
     }
 }
+
