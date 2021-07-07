@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controller">
+
+    <MenuBar>
+        <Menu text="Файл">
+            <MenuItem onAction="#btnExit" text="Выйти из программы" />
+        </Menu>
+    </MenuBar>
+
+    <TextField fx:id="pathField" editable="false" focusTraversable="false" />
+    <ListView fx:id="filesList" onMouseClicked="#filesListClicked" VBox.vgrow="ALWAYS" />
+
+    <HBox spacing="5">
+<!--        Добаляем кнопки-->
+        <Button maxWidth="Infinity" text="Копировать файл" HBox.hgrow="ALWAYS" onAction="#copyAction"/>
+        <Button maxWidth="Infinity" text="Переместить файл" HBox.hgrow="ALWAYS" onAction="#moveAction"/>
+        <Button maxWidth="Infinity" text="Удалить файл" HBox.hgrow="ALWAYS" onAction="#deleteAction"/>
+        <Button maxWidth="Infinity" text="Переименовать файл" HBox.hgrow="ALWAYS" />
+        <Button maxWidth="Infinity" text="Выход из программы" HBox.hgrow="ALWAYS" onAction="#btnExit" />
+        <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </HBox>
+
+</VBox>
