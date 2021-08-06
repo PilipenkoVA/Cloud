@@ -65,7 +65,7 @@ public class MainController implements Initializable {
             tfFileName.clear();                                                      // очищаем поле для ввода
         }
     }
-//     Нажатие на кнопку "Загрузить"
+    //     Нажатие на кнопку "Загрузить"
     public void pressOnUploadBtn(ActionEvent actionEvent) {                        // когда нажимаем на кнопку загрузить
         System.out.println("Загрузить файл: " + tfFileName.getText());
         tfFileName.clear();                                                        // очищаем поле для ввода

@@ -1,3 +1,4 @@
+
 package com.pilipenko.netty.example.common;
 
 public class FileRequest extends AbstractMessage {                      // наследуемся от "AbstractMessage"
