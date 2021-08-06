@@ -12,8 +12,13 @@ import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 
+import java.io.DataOutputStream;
+import java.net.Socket;
+import java.util.Arrays;
+
 public class Server {
     public void run() throws Exception {
+
         // Пул потоков для обработки подключений клиентов
         EventLoopGroup mainGroup = new NioEventLoopGroup();
         // Пул потоков для обработки сетевых сообщений
@@ -31,7 +36,8 @@ public class Server {
                             socketChannel.pipeline().addLast(
                                     new ObjectDecoder(50 * 1024 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new ObjectEncoder(),
-                                    new MainHandler()
+                                    new MainHandler(),
+                                    new UnlimitedHandler()
                             );
                         }
                     });
@@ -50,5 +56,16 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         new Server().run();
+
+        new Thread(new UnlimitedServer()).start();
+        Thread.sleep(1000);
+        Socket socket = new Socket("localhost", 8189);
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+        byte[] outData = new byte[32];
+        Arrays.fill(outData, (byte) 65);
+        while (true) {
+            out.write(outData);
+            Thread.sleep(50);
+        }
     }
 }
